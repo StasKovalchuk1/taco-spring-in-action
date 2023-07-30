@@ -3,6 +3,9 @@ package tacos;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -32,7 +35,12 @@ public class Taco {
         this.createdAt = new Date();
     }
 
+
+    /**
+     * use @JsonIgnore to avoid json recursion
+     */
     @ManyToOne
     @JoinColumn(name = "taco_order", referencedColumnName = "id")
+    @JsonIgnore
     private TacoOrder tacoOrder;
 }
